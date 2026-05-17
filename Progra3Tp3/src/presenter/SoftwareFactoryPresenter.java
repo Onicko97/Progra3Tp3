@@ -1,15 +1,15 @@
 package presenter;
 
-import model.ControladorPersonas;
+import model.GestorEmpleados;
 import view.VentanaPrincipal;
 
 public class SoftwareFactoryPresenter {
 	
 	VentanaPrincipal _ventana;
-	ControladorPersonas _controlador;
+	GestorEmpleados _gestor;
 	
-	public SoftwareFactoryPresenter(VentanaPrincipal ventana, ControladorPersonas controlador) {
+	public SoftwareFactoryPresenter(VentanaPrincipal ventana, GestorEmpleados gestor) {
 		this._ventana = ventana;
-		this._controlador = controlador;
+		this._gestor = gestor;
 	}
 }
