@@ -18,7 +18,7 @@ public class Requerimiento {
 		inicializarRequerimiento();
 	}
 	
-	public void inicializarRequerimiento() {
+	private void inicializarRequerimiento() {
 		_requerimiento.put("Lideres", _cantLideres);
 		_requerimiento.put("Arquitectos", _cantArquitectos);
 		_requerimiento.put("Programadores", _cantProgramadores);
