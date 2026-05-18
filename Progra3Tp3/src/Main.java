@@ -9,6 +9,7 @@ public class Main {
 		VentanaPrincipal ventana = new VentanaPrincipal();
 		GestorEmpleados gestor = new GestorEmpleados();
 		SoftwareFactoryPresenter presenter = new SoftwareFactoryPresenter(ventana, gestor);
+		presenter.iniciar();
 		System.out.println("hello world");
 	}
 

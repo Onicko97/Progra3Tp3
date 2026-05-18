@@ -21,9 +21,7 @@ public class Requerimientos extends JDialog {
 	private JTextField textFieldCantProgamadores;
 	private JTextField textFieldCantTesters;
 
-	/**
-	 * Launch the application.
-	 */
+
 	public static void main(String[] args) {
 		try {
 			Requerimientos dialog = new Requerimientos();
@@ -34,9 +32,7 @@ public class Requerimientos extends JDialog {
 		}
 	}
 
-	/**
-	 * Create the dialog.
-	 */
+	
 	public Requerimientos() {
 		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		setTitle("Requerimientos");

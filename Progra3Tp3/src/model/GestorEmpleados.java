@@ -13,6 +13,10 @@ public class GestorEmpleados {
 		this._listaIncompatibles = new HashMap<String, String>();
 	}
 	
+	public HashMap<String, Empleado> getListaEmpleados() {
+		return this._listaEmpleados;
+	}
+	
 	public void agregarEmpleado(String nombre, String rol, int calificacion) {
 		
 		if(nombre == "" || rol == "" || calificacion < 1 || calificacion > 5)
