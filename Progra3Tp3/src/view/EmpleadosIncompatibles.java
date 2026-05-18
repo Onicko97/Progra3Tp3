@@ -34,7 +34,7 @@ public class EmpleadosIncompatibles extends JDialog {
 	public EmpleadosIncompatibles() {
 		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		setTitle("Empleados Incompatibles");
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 650, 500);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);

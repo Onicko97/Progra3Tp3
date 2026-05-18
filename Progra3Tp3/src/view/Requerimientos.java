@@ -9,11 +9,17 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
 
 public class Requerimientos extends JDialog {
 
 	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
+	private JTextField textFieldCantLideres;
+	private JTextField textFieldCantArquitectos;
+	private JTextField textFieldCantProgamadores;
+	private JTextField textFieldCantTesters;
 
 	/**
 	 * Launch the application.
@@ -39,6 +45,50 @@ public class Requerimientos extends JDialog {
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
+		{
+			JLabel lblCantLideres = new JLabel("Cantidad de Lideres de proyecto: ");
+			lblCantLideres.setBounds(35, 45, 172, 14);
+			contentPanel.add(lblCantLideres);
+		}
+		{
+			textFieldCantLideres = new JTextField();
+			textFieldCantLideres.setBounds(217, 42, 86, 20);
+			contentPanel.add(textFieldCantLideres);
+			textFieldCantLideres.setColumns(10);
+		}
+		{
+			JLabel lblCantArquitectos = new JLabel("Cantidad de Arquitectos:");
+			lblCantArquitectos.setBounds(35, 70, 172, 14);
+			contentPanel.add(lblCantArquitectos);
+		}
+		{
+			textFieldCantArquitectos = new JTextField();
+			textFieldCantArquitectos.setColumns(10);
+			textFieldCantArquitectos.setBounds(217, 67, 86, 20);
+			contentPanel.add(textFieldCantArquitectos);
+		}
+		{
+			JLabel lblCantProgramadores = new JLabel("Cantidad de Programadores:");
+			lblCantProgramadores.setBounds(35, 95, 172, 14);
+			contentPanel.add(lblCantProgramadores);
+		}
+		{
+			textFieldCantProgamadores = new JTextField();
+			textFieldCantProgamadores.setColumns(10);
+			textFieldCantProgamadores.setBounds(217, 92, 86, 20);
+			contentPanel.add(textFieldCantProgamadores);
+		}
+		{
+			JLabel lblCantTesters = new JLabel("Cantidad de Testers:");
+			lblCantTesters.setBounds(35, 120, 172, 14);
+			contentPanel.add(lblCantTesters);
+		}
+		{
+			textFieldCantTesters = new JTextField();
+			textFieldCantTesters.setColumns(10);
+			textFieldCantTesters.setBounds(217, 117, 86, 20);
+			contentPanel.add(textFieldCantTesters);
+		}
 		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
