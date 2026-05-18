@@ -8,6 +8,9 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import presenter.SoftwareFactoryPresenter;
+
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
@@ -19,23 +22,9 @@ public class CargaEmpleados extends JDialog {
 	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
 	private JTextField textFieldNombre;
+	private SoftwareFactoryPresenter presenter;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		try {
-			CargaEmpleados dialog = new CargaEmpleados();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
 
-	/**
-	 * Create the dialog.
-	 */
 	public CargaEmpleados() {
 		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		setTitle("Carga de Empleados");
@@ -72,23 +61,28 @@ public class CargaEmpleados extends JDialog {
 		contentPanel.add(comboBoxCalificacion);
 		comboBoxCalificacion.setModel(new DefaultComboBoxModel(new String[] {"Seleccione una calificacion","1","2","3","4","5"}));
 		
-		{
+		
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
-			{
-				JButton okButton = new JButton("OK");
-				okButton.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						//llamar al presenter y/o poner logica
+			
+			JButton okButton = new JButton("OK");
+			okButton.addActionListener(new ActionListener() {
+				
+			public void actionPerformed(ActionEvent e) {
+						String nombre = textFieldNombre.getText();
+						String rol = comboBoxRol.getSelectedItem().toString();
+						String calificacion = comboBoxCalificacion.getSelectedItem().toString();
+						presenter.onAgregarEmpleado(nombre, rol, calificacion);
+						
 						dispose();
 					}
 				});
 				okButton.setActionCommand("OK");
 				buttonPane.add(okButton);
 				getRootPane().setDefaultButton(okButton);
-			}
-			{
+			
+			
 				JButton cancelButton = new JButton("Cancel");
 				cancelButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
@@ -97,7 +91,9 @@ public class CargaEmpleados extends JDialog {
 				});
 				cancelButton.setActionCommand("Cancel");
 				buttonPane.add(cancelButton);
-			}
-		}
+			
 	}
+	public void setPresenter(SoftwareFactoryPresenter presenter) {
+	        this.presenter = presenter;
+	    }
 }

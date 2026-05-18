@@ -1,82 +1,103 @@
 package view;
 
+import java.awt.BorderLayout;
+import java.awt.CardLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.JButton;
+import javax.swing.JDialog;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class VentanaPrincipal {
+public class VentanaPrincipal extends JFrame {
 
-	private JFrame frame;
+	private final CardLayout cardLayout = new CardLayout();
+	private final JPanel contenedor = new JPanel(cardLayout);
+	private final Vista vista;
+	private final CargaEmpleados cargaEmpleados;
+	private final EmpleadosIncompatibles empleadosIncompatibles;
+	private final Requerimientos requerimientos;
+	private final Resultados resultado;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					VentanaPrincipal window = new VentanaPrincipal();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the application.
-	 */
 	public VentanaPrincipal() {
-		initialize();
+		 vista = new Vista();
+		 resultado = new Resultados();
+		 cargaEmpleados = new CargaEmpleados();
+		 empleadosIncompatibles = new EmpleadosIncompatibles();
+		 requerimientos = new Requerimientos();
+		 configurarLayout();
+		 propiedadesPorDefecto();
+	}
+	
+	private void configurarLayout() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLocationRelativeTo(null);
+		
+		contenedor.add(vista, "vistaPrincipal");
+		contenedor.add(resultado, "resultados");
+		getContentPane().add(contenedor, BorderLayout.CENTER);
+	  mostrarVistaPrincipal();
+	}
+	
+	private void propiedadesPorDefecto() {
+		this.setBounds(100, 100, 800, 600);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	}
+	
+	 public void mostrar() {
+	        EventQueue.invokeLater(() -> setVisible(true));
+	    }
+
+	public void mostrarVistaPrincipal() {
+		cardLayout.show(contenedor, "vistaPrincipal");
+	}
+	
+	public void mostrarResultados() {
+		System.out.println("asd");
+		cardLayout.show(contenedor, "resultados");
+	}
+	
+	public void mostrarCargaEmpleados() {
+		
+		cargaEmpleados.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		cargaEmpleados.setVisible(true);
+	}
+	public void mostrarIncompatibles() {
+		
+		empleadosIncompatibles.setComboBoxEmpleados(vista.getNombresEmpleados());
+		empleadosIncompatibles.setListaIncompatiblesEmpleados(vista.getNombresEmpleados());
+		empleadosIncompatibles.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		empleadosIncompatibles.setVisible(true);
+	}
+	public void mostrarRequerimientos() {
+	
+		requerimientos.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		requerimientos.setVisible(true);
+	}
+	
+	public void actualizarCheckBoxIncompatibles() {
+		empleadosIncompatibles.setComboBoxEmpleados(vista.getNombresEmpleados());
+	}
+	
+	public Vista getVista() {
+		return vista;
+	}
+	
+	public CargaEmpleados getCargaEmpleados() {
+		return cargaEmpleados;
 	}
 
-	/**
-	 * Initialize the contents of the frame.
-	 */
-	private void initialize() {
-		frame = new JFrame();
-		frame.setBounds(100, 100, 640, 480);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
+	public EmpleadosIncompatibles getEmpleadosIncompatibles() {
 		
-		JButton btnListaEmpleados = new JButton("Lista de Empleados");
-		btnListaEmpleados.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-			}
-		});
-		btnListaEmpleados.setBounds(218, 124, 187, 23);
-		frame.getContentPane().add(btnListaEmpleados);
-		
-		JButton btnIncompatibles = new JButton("Lista de Incompatibles");
-		btnIncompatibles.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-			}
-		});
-		btnIncompatibles.setBounds(218, 177, 187, 23);
-		frame.getContentPane().add(btnIncompatibles);
-		
-		JButton btnRequerimientos = new JButton("Requerimientos");
-		btnRequerimientos.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-			}
-		});
-		btnRequerimientos.setBounds(218, 81, 187, 23);
-		frame.getContentPane().add(btnRequerimientos);
-		
-		JButton btnResolver = new JButton("Resolver");
-		btnResolver.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-			}
-		});
-		btnResolver.setBounds(218, 232, 187, 23);
-		frame.getContentPane().add(btnResolver);
+		return empleadosIncompatibles;
 	}
+	
+
+	
 }
