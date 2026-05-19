@@ -36,7 +36,7 @@ public class Vista extends JPanel {
 		gbl_botonesContenedor.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		gbl_botonesContenedor.rowWeights = new double[]{30, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		botonesContenedor.setLayout(gbl_botonesContenedor);
-		JButton btnListaEmpleados = new JButton("Lista de Empleados");
+		JButton btnListaEmpleados = new JButton("Carga de empleados");
 		btnListaEmpleados.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				presenter.onClick("cargaEmpleados");
