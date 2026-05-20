@@ -116,15 +116,11 @@ public class Vista extends JPanel {
 		return nombres;
 	}
 	
-	 public void actualizarTabla(List<Empleado> empleados, int index) {
+	 public void actualizarTabla(List<Empleado> empleados, int index, String empleadoSeleccionado) {
 		 	Object nombreIncompatible = modeloTabla.getValueAt(index, 0);
-		 	modeloTabla.setValueAt(nombreIncompatible, index, 3);
-//	        for (Empleado e : empleados) {
-//	            modeloTabla.addRow(new Object[]{
-//	                e.get_nombre(), e.get_rol(), e.get_calificacionHistorica(), nombreIncompatible
-//	                
-//	            });
-//	        }
+		 	
+		 	modeloTabla.setValueAt(empleadoSeleccionado, index, 3);
+
 	        
 	    }
 	

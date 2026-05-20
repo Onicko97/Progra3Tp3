@@ -33,10 +33,11 @@ public class SoftwareFactoryPresenter {
 		_ventana.mostrar();
 	}
 	
-	public void onAgregarIncompatible(int index) {
+	public void onAgregarIncompatible(int index, String empleadoSeleccionado) {
 		Vista vista = _ventana.getVista();
 		List<Empleado> empleados = new ArrayList<Empleado>(_gestor.getListaEmpleados().values());
-	  vista.actualizarTabla(empleados, index);
+		// aca es necesario actualizar con quien es incompatible
+	  vista.actualizarTabla(empleados, index, empleadoSeleccionado);
 	}
 	
 	public void onAgregarEmpleado(String nombre, String rol, String calificacion) {
