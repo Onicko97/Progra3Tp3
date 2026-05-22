@@ -72,8 +72,8 @@ public class EmpleadosIncompatibles extends JDialog {
 				JButton okButton = new JButton("OK");
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						
-						presenter.onAgregarIncompatible(listaEmpleados.getSelectedIndex(), modelo.getSelectedItem().toString());
+						listaEmpleados.getSelectedValue().toString();
+						presenter.onAgregarIncompatible(listaEmpleados.getSelectedValue().toString() ,listaEmpleados.getSelectedIndex(), modelo.getSelectedItem().toString());
 						//obtenerSeleccionados();
 						dispose();
 					}

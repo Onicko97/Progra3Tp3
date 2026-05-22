@@ -7,12 +7,22 @@ public class Empleado {
 
 	private String _rol;
 	private int _calificacionHistorica;
+	private Empleado incompatible;
 	
 	
 	public Empleado(String rol, int calificacion, String nombre) {
 		this._nombre = nombre;
 		this._rol = rol;
 		this._calificacionHistorica = calificacion;
+		this.incompatible = null;
+	}
+	
+	public void setIncompatible(Empleado incom) {
+		this.incompatible = incom;
+	}
+	
+	public Empleado getIncompatible() {
+		return this.incompatible;
 	}
 	
 	public String nombre() {
