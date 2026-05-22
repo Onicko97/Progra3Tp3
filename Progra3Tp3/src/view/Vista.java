@@ -66,7 +66,7 @@ public class Vista extends JPanel {
 		JButton btnResolver = new JButton("Resolver");
 		btnResolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("ads");
+				
 				presenter.onClick("resultados");
 			}
 		});

@@ -17,6 +17,10 @@ public class GestorEmpleados {
 		return this._listaEmpleados;
 	}
 	
+	public Empleado buscarEmpleadoPorNombre(String nombre) {
+		return _listaEmpleados.get(nombre);
+	}
+	
 	public void agregarEmpleado(String nombre, String rol, int calificacion) {
 		
 		if(nombre == "" || rol == "" || calificacion < 1 || calificacion > 5)
