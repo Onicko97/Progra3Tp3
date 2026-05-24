@@ -3,8 +3,6 @@ package model;
 public class Empleado {
 	
 	private String _nombre;
-	
-
 	private String _rol;
 	private int _calificacionHistorica;
 	private Empleado incompatible;

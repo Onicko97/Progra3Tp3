@@ -7,6 +7,9 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import presenter.SoftwareFactoryPresenter;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
@@ -14,15 +17,16 @@ import javax.swing.JTextField;
 
 public class Requerimientos extends JDialog {
 
+	private SoftwareFactoryPresenter presenter;
 	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
 	private JTextField textFieldCantLideres;
 	private JTextField textFieldCantArquitectos;
-	private JTextField textFieldCantProgamadores;
+	private JTextField textFieldCantProgramadores;
 	private JTextField textFieldCantTesters;
 
 
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		try {
 			Requerimientos dialog = new Requerimientos();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
@@ -30,8 +34,11 @@ public class Requerimientos extends JDialog {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}*/
+	
+	public void setPresenter(SoftwareFactoryPresenter presenter) {
+		this.presenter = presenter;
 	}
-
 	
 	public Requerimientos() {
 		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
@@ -69,10 +76,10 @@ public class Requerimientos extends JDialog {
 			contentPanel.add(lblCantProgramadores);
 		}
 		{
-			textFieldCantProgamadores = new JTextField();
-			textFieldCantProgamadores.setColumns(10);
-			textFieldCantProgamadores.setBounds(217, 92, 86, 20);
-			contentPanel.add(textFieldCantProgamadores);
+			textFieldCantProgramadores = new JTextField();
+			textFieldCantProgramadores.setColumns(10);
+			textFieldCantProgramadores.setBounds(217, 92, 86, 20);
+			contentPanel.add(textFieldCantProgramadores);
 		}
 		{
 			JLabel lblCantTesters = new JLabel("Cantidad de Testers:");
@@ -92,8 +99,13 @@ public class Requerimientos extends JDialog {
 			{
 				JButton okButton = new JButton("OK");
 				okButton.addActionListener(new ActionListener() {
+					
 					public void actionPerformed(ActionEvent e) {
-						//llamar al presenter y/o poner logica
+						int cantLideres = Integer.parseInt(textFieldCantLideres.getText());
+						int cantArquitectos = Integer.parseInt(textFieldCantArquitectos.getText());
+						int cantProgramadores = Integer.parseInt(textFieldCantProgramadores.getText());
+						int cantTesters = Integer.parseInt(textFieldCantTesters.getText());
+						presenter.settearRequerimientos(cantLideres, cantArquitectos, cantProgramadores, cantTesters);
 						dispose();
 					}
 				});

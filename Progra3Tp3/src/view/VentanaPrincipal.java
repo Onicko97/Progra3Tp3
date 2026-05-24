@@ -9,6 +9,9 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+
+import presenter.SoftwareFactoryPresenter;
+
 import javax.swing.JButton;
 import javax.swing.JDialog;
 
@@ -26,13 +29,13 @@ public class VentanaPrincipal extends JFrame {
 	private final Resultados resultado;
 
 	public VentanaPrincipal() {
-		 vista = new Vista();
-		 resultado = new Resultados();
-		 cargaEmpleados = new CargaEmpleados();
-		 empleadosIncompatibles = new EmpleadosIncompatibles();
-		 requerimientos = new Requerimientos();
-		 configurarLayout();
-		 propiedadesPorDefecto();
+		vista = new Vista();
+		resultado = new Resultados();
+		cargaEmpleados = new CargaEmpleados();
+		empleadosIncompatibles = new EmpleadosIncompatibles();
+		requerimientos = new Requerimientos();
+		configurarLayout();
+		propiedadesPorDefecto();
 	}
 	
 	private void configurarLayout() {
@@ -75,8 +78,9 @@ public class VentanaPrincipal extends JFrame {
 		empleadosIncompatibles.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		empleadosIncompatibles.setVisible(true);
 	}
-	public void mostrarRequerimientos() {
+	public void mostrarRequerimientos(SoftwareFactoryPresenter presenter) {
 	
+		requerimientos.setPresenter(presenter);
 		requerimientos.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		requerimientos.setVisible(true);
 	}

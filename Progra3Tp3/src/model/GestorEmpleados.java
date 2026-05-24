@@ -7,6 +7,7 @@ public class GestorEmpleados {
 	
 	HashMap<String, Empleado> _listaEmpleados;		//clave=nombre valor=Empleado
 	HashMap<String, String> _listaIncompatibles;	//clave=nombre1 valor=nombre2
+	Requerimiento requerimientos;
 	
 	public GestorEmpleados() {
 		this._listaEmpleados = new HashMap<String, Empleado>();
@@ -28,6 +29,10 @@ public class GestorEmpleados {
 		
 		Empleado emp = new Empleado(rol, calificacion, nombre);
 		_listaEmpleados.put(nombre, emp);
+	}
+	
+	public void settearRequerimientos(int cantLideres, int cantArquitectos, int cantProgramadores, int cantTesters) {
+		requerimientos = new Requerimiento(cantLideres, cantArquitectos, cantProgramadores, cantTesters);
 	}
 	
 }

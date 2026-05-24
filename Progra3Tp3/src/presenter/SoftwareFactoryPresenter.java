@@ -58,7 +58,7 @@ public class SoftwareFactoryPresenter {
 			_ventana.mostrarIncompatibles();
 			break;
 		case "requerimientos":
-			_ventana.mostrarRequerimientos();
+			_ventana.mostrarRequerimientos(this);
 			break;
 		case "resultados":
 			_ventana.mostrarResultados();
@@ -66,4 +66,9 @@ public class SoftwareFactoryPresenter {
 			break;
 		}
 	}
+	
+	public void settearRequerimientos(int cantLideres, int cantArquitectos, int cantProgramadores, int cantTesters) {
+		_gestor.settearRequerimientos(cantLideres, cantArquitectos, cantProgramadores, cantTesters);
+	}
+	
 }
