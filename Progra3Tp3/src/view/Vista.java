@@ -6,6 +6,7 @@ import java.awt.FlowLayout;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -107,6 +108,10 @@ public class Vista extends JPanel {
 	}
 	
 	public List<String> getNombresEmpleados() {
+		
+		if(tablaVacia())
+			throw new InvalidParameterException("Empleados invalidos");
+		
 		int col = 0;
 		List<String> nombres = new ArrayList<String>();
 		for(int i = 0; i < tablaEmpleados.getRowCount(); i++) {
@@ -114,6 +119,17 @@ public class Vista extends JPanel {
 			nombres.add(nombre.toString());
 		}
 		return nombres;
+	}
+	
+	private boolean tablaVacia() {
+		boolean vacios = true;
+		int col = 0;
+		for (int i = 0; i < tablaEmpleados.getRowCount(); i++) {
+			if (tablaEmpleados.getValueAt(i, col) != null) {
+				vacios = false;
+			}
+		}
+		return vacios;
 	}
 	
 	 public void actualizarTabla(List<Empleado> empleados, int index, String empleadoSeleccionado) {

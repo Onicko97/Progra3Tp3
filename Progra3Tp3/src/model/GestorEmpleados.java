@@ -24,7 +24,7 @@ public class GestorEmpleados {
 	
 	public void agregarEmpleado(String nombre, String rol, int calificacion) {
 		
-		if(nombre == "" || rol == "" || calificacion < 1 || calificacion > 5)
+		if(nombre == "" || nombre == null || rol == "" || rol == null || rol == "Seleccione un rol" || calificacion < 1 || calificacion > 5)
 			throw new InvalidParameterException("datos de empleado invalidos");
 		
 		Empleado emp = new Empleado(rol, calificacion, nombre);

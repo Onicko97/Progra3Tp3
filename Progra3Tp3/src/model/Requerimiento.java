@@ -1,5 +1,6 @@
 package model;
 
+import java.security.InvalidParameterException;
 import java.util.HashMap;
 
 public class Requerimiento {
@@ -10,6 +11,10 @@ public class Requerimiento {
 	private HashMap<String,Integer> _requerimiento; //clave = rol valor = cantidad
 	
 	public Requerimiento(int cantLideres, int cantArquitectos, int cantProgramadores, int cantTesters) {
+		
+		if(!validacion(cantLideres, cantArquitectos, cantProgramadores, cantTesters))
+			throw new InvalidParameterException("Requerimientos invalidos");
+		
 		_cantLideres = cantLideres;
 		_cantArquitectos = cantArquitectos;
 		_cantProgramadores = cantProgramadores;
@@ -23,6 +28,12 @@ public class Requerimiento {
 		_requerimiento.put("Arquitectos", _cantArquitectos);
 		_requerimiento.put("Programadores", _cantProgramadores);
 		_requerimiento.put("Testers", _cantTesters);
+	}
+	
+	private boolean validacion(int cantLideres, int cantArquitectos, int cantProgramadores, int cantTesters) {
+		if(cantLideres < 0 || cantArquitectos < 0 || cantProgramadores < 0 || cantTesters < 0)
+			return false;
+		return true;
 	}
 
 	public int getCantLideres() {
