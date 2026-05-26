@@ -33,12 +33,12 @@ public class SoftwareFactoryPresenter {
 		_ventana.mostrar();
 	}
 	
-	public void onAgregarIncompatible(String empleado, int index, String empleadoSeleccionado) {
+	public void onAgregarIncompatible(String empleado, int index, String empleadoIncompatibleSeleccionado, int index2) {
 		Vista vista = _ventana.getVista();
 		List<Empleado> empleados = new ArrayList<Empleado>(_gestor.getListaEmpleados().values());
-		Empleado incomp = _gestor.buscarEmpleadoPorNombre(empleadoSeleccionado);
+		Empleado incomp = _gestor.buscarEmpleadoPorNombre(empleadoIncompatibleSeleccionado);
 		_gestor.buscarEmpleadoPorNombre(empleado).setIncompatible(incomp);
-	  vista.actualizarTabla(empleados, index, empleadoSeleccionado);
+	  vista.actualizarTabla(empleado, index, empleadoIncompatibleSeleccionado, index2);
 	}
 	
 	public void onAgregarEmpleado(String nombre, String rol, String calificacion) {

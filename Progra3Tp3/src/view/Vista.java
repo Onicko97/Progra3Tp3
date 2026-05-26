@@ -132,11 +132,11 @@ public class Vista extends JPanel {
 		return vacios;
 	}
 	
-	 public void actualizarTabla(List<Empleado> empleados, int index, String empleadoSeleccionado) {
-		 	Object nombreIncompatible = modeloTabla.getValueAt(index, 0);
+	 public void actualizarTabla(String empleado, int index, String empleadoSeleccionado, int index2) {
+		 	//Object nombreIncompatible = modeloTabla.getValueAt(index, 0);
 		 	
 		 	modeloTabla.setValueAt(empleadoSeleccionado, index, 3);
-
+		 	modeloTabla.setValueAt(empleado, index2, 3);
 	        
 	    }
 	

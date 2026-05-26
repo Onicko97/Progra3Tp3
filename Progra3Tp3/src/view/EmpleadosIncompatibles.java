@@ -10,6 +10,7 @@ import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
@@ -72,8 +73,12 @@ public class EmpleadosIncompatibles extends JDialog {
 				JButton okButton = new JButton("OK");
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						listaEmpleados.getSelectedValue().toString();
-						presenter.onAgregarIncompatible(listaEmpleados.getSelectedValue().toString() ,listaEmpleados.getSelectedIndex(), modelo.getSelectedItem().toString());
+						if(listaEmpleados.getSelectedValue().toString() == modelo.getSelectedItem().toString()) {
+							JOptionPane.showMessageDialog(null, "Un empleado no puede ser incompatible consigo mismo");
+							return;
+						}
+						presenter.onAgregarIncompatible(listaEmpleados.getSelectedValue().toString() ,listaEmpleados.getSelectedIndex(),
+								modelo.getSelectedItem().toString(), modelo.getIndexOf(modelo.getSelectedItem()));
 						//obtenerSeleccionados();
 						dispose();
 					}
