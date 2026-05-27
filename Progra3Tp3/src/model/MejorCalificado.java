@@ -58,9 +58,20 @@ public class MejorCalificado {
 	}
 	
 	public List<Empleado> buscarMejorEquipo(List<List<Empleado>> conjuntos) {
-		List<Empleado> primero = conjuntos.get(0); 
-		//buscarMejorEquipo(primero, )
-		return null;
+		int mejorCalificacionTotal = 0;
+		List<Empleado> mejor = conjuntos.get(0); 
+		for(List<Empleado> equipo : conjuntos) {
+			int calificacion = 0;
+			for(Empleado emp : equipo) {
+				calificacion += emp.get_calificacionHistorica();
+			}
+			if(calificacion > mejorCalificacionTotal) {
+				mejor = equipo;
+				mejorCalificacionTotal = calificacion;
+				
+			}
+		}
+		return mejor;
 	}
 	
 	//public 
