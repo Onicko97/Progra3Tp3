@@ -1,5 +1,6 @@
 package presenter;
 
+import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -59,7 +60,12 @@ public class SoftwareFactoryPresenter {
 			_ventana.mostrarCargaEmpleados();
 			break;
 		case "incompatibles":
-			_ventana.mostrarIncompatibles();
+			try {
+				_ventana.mostrarIncompatibles();
+			}catch(InvalidParameterException e){
+				_ventana.mostrarError("No hay empleados para agregar incompatibilidad");
+			}
+			
 			break;
 		case "requerimientos":
 			_ventana.mostrarRequerimientos(this);
