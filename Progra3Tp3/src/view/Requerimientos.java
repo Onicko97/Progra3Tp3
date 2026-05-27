@@ -101,10 +101,10 @@ public class Requerimientos extends JDialog {
 				okButton.addActionListener(new ActionListener() {
 					
 					public void actionPerformed(ActionEvent e) {
-						int cantLideres = Integer.parseInt(textFieldCantLideres.getText());
-						int cantArquitectos = Integer.parseInt(textFieldCantArquitectos.getText());
-						int cantProgramadores = Integer.parseInt(textFieldCantProgramadores.getText());
-						int cantTesters = Integer.parseInt(textFieldCantTesters.getText());
+						String cantLideres = textFieldCantLideres.getText();
+						String cantArquitectos = textFieldCantArquitectos.getText();
+						String cantProgramadores = textFieldCantProgramadores.getText();
+						String cantTesters = textFieldCantTesters.getText();
 						presenter.settearRequerimientos(cantLideres, cantArquitectos, cantProgramadores, cantTesters);
 						dispose();
 					}

@@ -5,6 +5,7 @@ import java.awt.CardLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -101,6 +102,10 @@ public class VentanaPrincipal extends JFrame {
 		
 		return empleadosIncompatibles;
 	}
+	
+	public void mostrarError(String msg) {
+        JOptionPane.showMessageDialog(this, msg, "Error", JOptionPane.ERROR_MESSAGE);
+    }
 	
 
 	
