@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 
 import model.GestorEmpleados;
 
-class TestGestorPersonas {
+class TestGestorEmpleados {
 
 	@Test
 	void agregarEmpleadoSinNombreTest() {
