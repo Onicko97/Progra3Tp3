@@ -1,26 +1,29 @@
 package model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Empleado {
 	
 	private String _nombre;
 	private String _rol;
 	private int _calificacionHistorica;
-	private Empleado incompatible;
+	private List<Empleado> incompatibles;
 	
 	
 	public Empleado(String rol, int calificacion, String nombre) {
 		this._nombre = nombre;
 		this._rol = rol;
 		this._calificacionHistorica = calificacion;
-		this.incompatible = null;
+		this.incompatibles = new ArrayList<Empleado>();
 	}
 	
-	public void setIncompatible(Empleado incom) {
-		this.incompatible = incom;
+	public void agregarIncompatible(Empleado incom) {
+		this.incompatibles.add(incom);
 	}
 	
-	public Empleado getIncompatible() {
-		return this.incompatible;
+	public List<Empleado> getIncompatibles() {
+		return this.incompatibles;
 	}
 	
 	public String nombre() {
@@ -59,5 +62,22 @@ public class Empleado {
 
 	public void set_calificacionHistorica(int _calificacionHistorica) {
 		this._calificacionHistorica = _calificacionHistorica;
+	}
+	
+	public String nombresIncompatibles() {
+		if(this.incompatibles.isEmpty())
+			return "";
+		StringBuilder string = new StringBuilder();
+		for (Empleado empleado : incompatibles) {
+			string.append(empleado._nombre);
+			string.append(", ");
+		}
+		//string.delete(0, string.length()-2);
+		return string.toString();
+	}
+	
+	@Override
+	public String toString() {
+		return _nombre;
 	}
 }

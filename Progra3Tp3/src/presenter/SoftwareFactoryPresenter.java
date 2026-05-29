@@ -4,6 +4,8 @@ import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
 import model.Empleado;
 import model.GestorEmpleados;
 import view.CargaEmpleados;
@@ -35,10 +37,18 @@ public class SoftwareFactoryPresenter {
 	}
 	
 	public void onAgregarIncompatible(String empleado, int index, String empleadoIncompatibleSeleccionado, int index2) {
+		
+		if(_gestor.getIncompatibles(empleado).contains(_gestor.buscarEmpleadoPorNombre(empleadoIncompatibleSeleccionado))) {
+			JOptionPane.showMessageDialog(null, "Los empleados seleccionados ya son incompatibles");
+			return;
+		}
+		
 		Vista vista = _ventana.getVista();
 		List<Empleado> empleados = new ArrayList<Empleado>(_gestor.getListaEmpleados().values());
 		Empleado incomp = _gestor.buscarEmpleadoPorNombre(empleadoIncompatibleSeleccionado);
-		_gestor.buscarEmpleadoPorNombre(empleado).setIncompatible(incomp);
+		Empleado incomp2 = _gestor.buscarEmpleadoPorNombre(empleado);
+		_gestor.buscarEmpleadoPorNombre(empleado).agregarIncompatible(incomp);
+		_gestor.buscarEmpleadoPorNombre(empleadoIncompatibleSeleccionado).agregarIncompatible(incomp2);
 	  vista.actualizarTabla(empleado, index, empleadoIncompatibleSeleccionado, index2);
 	}
 	

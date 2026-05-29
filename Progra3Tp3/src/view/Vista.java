@@ -132,12 +132,28 @@ public class Vista extends JPanel {
 		return vacios;
 	}
 	
-	 public void actualizarTabla(String empleado, int index, String empleadoSeleccionado, int index2) {
+	 public void actualizarTabla(String empleado, int index, String empleadoIncompatible, int index2) {
 		 	//Object nombreIncompatible = modeloTabla.getValueAt(index, 0);
-		 	
-		 	modeloTabla.setValueAt(empleadoSeleccionado, index, 3);
-		 	modeloTabla.setValueAt(empleado, index2, 3);
-	        
+		 	if(modeloTabla.getValueAt(index, 3) == "" && modeloTabla.getValueAt(index2, 3) == "") {
+		 		modeloTabla.setValueAt(empleadoIncompatible, index, 3);
+		 		modeloTabla.setValueAt(empleado,  index2,  3);
+		 		return;
+		 	}
+		 	if(modeloTabla.getValueAt(index, 3) == "" && modeloTabla.getValueAt(index2, 3) != "") {
+		 		modeloTabla.setValueAt(empleadoIncompatible, index, 3);
+		 		modeloTabla.setValueAt(modeloTabla.getValueAt(index2, 3) + ", " + empleado, index2, 3);
+		 		return;
+		 	}
+		 	if(modeloTabla.getValueAt(index, 3) != "" && modeloTabla.getValueAt(index2, 3) == "") {
+		 		modeloTabla.setValueAt(modeloTabla.getValueAt(index, 3) + ", " + empleadoIncompatible, index, 3);
+		 		modeloTabla.setValueAt(empleado,  index2,  3);
+		 		return;
+		 	}
+		 	if(modeloTabla.getValueAt(index, 3) != "" && modeloTabla.getValueAt(index2, 3) != ""){
+		 		modeloTabla.setValueAt(modeloTabla.getValueAt(index, 3) + ", " + empleadoIncompatible, index, 3);
+		 		modeloTabla.setValueAt(modeloTabla.getValueAt(index2, 3) + ", " + empleado, index2, 3);
+		 		return;
+		 	}
 	    }
 	
 	 public void actualizarTabla(List<Empleado> empleados) {
@@ -145,7 +161,7 @@ public class Vista extends JPanel {
 	        modeloTabla.setRowCount(0);
 	        for (Empleado e : empleados) {
 	            modeloTabla.addRow(new Object[]{
-	                e.get_nombre(), e.get_rol(), e.get_calificacionHistorica(), ""
+	                e.get_nombre(), e.get_rol(), e.get_calificacionHistorica(), e.nombresIncompatibles()
 	            });
 	        }
 	        
