@@ -36,6 +36,10 @@ public class GestorEmpleados {
 		requerimientos = new Requerimiento(cantLideres, cantArquitectos, cantProgramadores, cantTesters);
 	}
 	
+	public List<String> getStringsRequerimientos(){
+		return requerimientos.getStringsRequerimientos();
+	}
+	
 	public List<Empleado> getIncompatibles(String nombreEmpleado){
 		return _listaEmpleados.get(nombreEmpleado).getIncompatibles();
 	}

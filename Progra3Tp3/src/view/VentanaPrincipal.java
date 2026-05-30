@@ -3,21 +3,15 @@ package view;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.EventQueue;
+import java.util.List;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
 
 import presenter.SoftwareFactoryPresenter;
 
-import javax.swing.JButton;
 import javax.swing.JDialog;
-
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 public class VentanaPrincipal extends JFrame {
 
@@ -44,7 +38,7 @@ public class VentanaPrincipal extends JFrame {
         setLocationRelativeTo(null);
 		
 		contenedor.add(vista, "vistaPrincipal");
-		contenedor.add(resultado, "resultados");
+		//contenedor.add(resultado, "resultados");
 		getContentPane().add(contenedor, BorderLayout.CENTER);
 	  mostrarVistaPrincipal();
 	}
@@ -62,9 +56,12 @@ public class VentanaPrincipal extends JFrame {
 		cardLayout.show(contenedor, "vistaPrincipal");
 	}
 	
-	public void mostrarResultados() {
-		System.out.println("asd");
-		cardLayout.show(contenedor, "resultados");
+	public void mostrarResultados(List<String> requerimientos) {
+		//cardLayout.show(contenedor, "resultados");
+		
+		resultado.settearRequerimientos(requerimientos);
+		resultado.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		resultado.setVisible(true);
 	}
 	
 	public void mostrarCargaEmpleados() {

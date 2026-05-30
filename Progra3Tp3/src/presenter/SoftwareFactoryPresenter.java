@@ -81,7 +81,11 @@ public class SoftwareFactoryPresenter {
 			_ventana.mostrarRequerimientos(this);
 			break;
 		case "resultados":
-			_ventana.mostrarResultados();
+			try {
+			_ventana.mostrarResultados(_gestor.getStringsRequerimientos());
+			}catch(NullPointerException e) {
+				_ventana.mostrarError("Requerimientos de equipo no ingresados");
+			}
 		default:
 			break;
 		}

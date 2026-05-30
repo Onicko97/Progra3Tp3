@@ -25,7 +25,6 @@ public class Requerimientos extends JDialog {
 	private JTextField textFieldCantProgramadores;
 	private JTextField textFieldCantTesters;
 
-
 	/*public static void main(String[] args) {
 		try {
 			Requerimientos dialog = new Requerimientos();

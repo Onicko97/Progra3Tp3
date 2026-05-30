@@ -72,7 +72,8 @@ public class Empleado {
 			string.append(empleado._nombre);
 			string.append(", ");
 		}
-		//string.delete(0, string.length()-2);
+		string.deleteCharAt(string.length()-1);
+		string.deleteCharAt(string.length()-1);
 		return string.toString();
 	}
 	
