@@ -64,7 +64,7 @@ public class Vista extends JPanel {
 		btnRequerimientos.setBounds(218, 81, 187, 23);
 
 		
-		JButton btnResolver = new JButton("Resolver");
+		JButton btnResolver = new JButton("Buscar Mejor Equipo");
 		btnResolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				

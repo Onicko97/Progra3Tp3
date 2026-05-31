@@ -82,7 +82,7 @@ public class SoftwareFactoryPresenter {
 			break;
 		case "resultados":
 			try {
-			_ventana.mostrarResultados(_gestor.getStringsRequerimientos());
+			_ventana.mostrarResultados(_gestor.getStringsRequerimientos(), this);
 			}catch(NullPointerException e) {
 				_ventana.mostrarError("Requerimientos de equipo no ingresados");
 			}
@@ -119,4 +119,7 @@ public class SoftwareFactoryPresenter {
 	    }
 	}
 	
+	public void buscarEquipo() {
+		_gestor.buscarEquipo();
+	}
 }

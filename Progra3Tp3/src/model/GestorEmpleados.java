@@ -32,6 +32,11 @@ public class GestorEmpleados {
 		_listaEmpleados.put(nombre, emp);
 	}
 	
+	public void buscarEquipo() {
+		Hilo hilo = new Hilo();
+		hilo.execute();
+	}
+	
 	public void settearRequerimientos(int cantLideres, int cantArquitectos, int cantProgramadores, int cantTesters) {
 		requerimientos = new Requerimiento(cantLideres, cantArquitectos, cantProgramadores, cantTesters);
 	}

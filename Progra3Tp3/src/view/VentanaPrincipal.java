@@ -56,9 +56,10 @@ public class VentanaPrincipal extends JFrame {
 		cardLayout.show(contenedor, "vistaPrincipal");
 	}
 	
-	public void mostrarResultados(List<String> requerimientos) {
+	public void mostrarResultados(List<String> requerimientos, SoftwareFactoryPresenter presenter) {
 		//cardLayout.show(contenedor, "resultados");
 		
+		resultado.settearPresenter(presenter);
 		resultado.settearRequerimientos(requerimientos);
 		resultado.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		resultado.setVisible(true);

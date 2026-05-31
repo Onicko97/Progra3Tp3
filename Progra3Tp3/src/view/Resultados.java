@@ -6,9 +6,16 @@ import java.util.List;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 
+import presenter.SoftwareFactoryPresenter;
+
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
 public class Resultados extends JDialog {
 	
 	private static final long serialVersionUID = 1L;
+	SoftwareFactoryPresenter presenter;
 	JLabel cantLideres;
 	JLabel cantArquitectos;
 	JLabel cantProg;
@@ -52,17 +59,28 @@ public class Resultados extends JDialog {
 		lblProgramadores.setBounds(20, 95, 84, 14);
 		getContentPane().add(lblProgramadores);
 		
-		JLabel lblTesters = new JLabel("Testers:");
-		lblTesters.setBounds(20, 120, 46, 14);
-		getContentPane().add(lblTesters);
-		
 		cantProg = new JLabel("0");
 		cantProg.setBounds(129, 95, 46, 14);
 		getContentPane().add(cantProg);
 		
+		JLabel lblTesters = new JLabel("Testers:");
+		lblTesters.setBounds(20, 120, 46, 14);
+		getContentPane().add(lblTesters);
+		
 		cantTesters = new JLabel("0");
 		cantTesters.setBounds(129, 120, 46, 14);
 		getContentPane().add(cantTesters);
+		
+		JButton btnResolver = new JButton("Resolver");
+		btnResolver.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				presenter.buscarEquipo();
+				
+			}
+		});
+		btnResolver.setBounds(275, 150, 89, 23);
+		getContentPane().add(btnResolver);
 	}
 	
 	public void settearRequerimientos(List<String> requerimientos) {
@@ -70,6 +88,10 @@ public class Resultados extends JDialog {
 		cantArquitectos.setText(requerimientos.get(1));
 		cantProg.setText(requerimientos.get(2));
 		cantTesters.setText(requerimientos.get(3));
+	}
+	
+	public void settearPresenter(SoftwareFactoryPresenter presenter) {
+		this.presenter = presenter;
 	}
 	
 }
