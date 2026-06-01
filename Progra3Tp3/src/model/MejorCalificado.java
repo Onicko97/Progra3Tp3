@@ -9,28 +9,28 @@ public class MejorCalificado {
 	private List<Empleado> testers;
 	private List<Empleado> programadores;
 	
-	private int lideresRequeridos;
-	private int arquitectosRequeridos;
-	private int testersRequeridos;
-	private int programadoresRequeridos;
-	private int equipoTotal;
+//	private int lideresRequeridos;
+//	private int arquitectosRequeridos;
+//	private int testersRequeridos;
+//	private int programadoresRequeridos;
+//	private int equipoTotal;
 	
 	
-	public MejorCalificado(int lideresRequeridos, int arquitectosRequeridos, int testersRequeridos, int programadoresRequeridos ) {
+	public MejorCalificado() {
 		this.lideres = new ArrayList<Empleado>();
 		this.arquitectos = new ArrayList<Empleado>();
 		this.testers = new ArrayList<Empleado>();
 		this.programadores = new ArrayList<Empleado>();
-		this.lideresRequeridos = lideresRequeridos;
-		this.arquitectosRequeridos = arquitectosRequeridos;
-		this.testersRequeridos = testersRequeridos;
-		this.programadoresRequeridos = programadoresRequeridos;
-		this.equipoTotal = lideresRequeridos + arquitectosRequeridos + testersRequeridos + programadoresRequeridos;
+//		this.lideresRequeridos = lideresRequeridos;
+//		this.arquitectosRequeridos = arquitectosRequeridos;
+//		this.testersRequeridos = testersRequeridos;
+//		this.programadoresRequeridos = programadoresRequeridos;
+//		this.equipoTotal = lideresRequeridos + arquitectosRequeridos + testersRequeridos + programadoresRequeridos;
 		}
 
 	public List<Empleado> resolver(List<Empleado> empleados) {
 		separarEmpleadosPorRol(empleados);
-		List<List<Empleado>> conjuntos = obtenerConjuntosSegunRequerimientos();
+		List<List<Empleado>> conjuntos = obtenerConjuntosSegunRequerimientos(1);
 		List<Empleado> equipoMasCalificado = buscarMejorEquipo(conjuntos);
 		return equipoMasCalificado;
 	}
@@ -72,10 +72,7 @@ public class MejorCalificado {
 			}
 		}
 		return mejor;
-	}
-	
-	//public 
-	
+	}	
 	
 	public void separarEmpleadosPorRol(List<Empleado> empleados) {
 		for(Empleado e: empleados) {
@@ -98,10 +95,39 @@ public class MejorCalificado {
 		}
 	}
 	
-	
-	public List<List<Empleado>> obtenerConjuntosSegunRequerimientos() {
-		List<Empleado> conjunto = new ArrayList<Empleado>();
-		
+	public List<List<Empleado>> obtenerConjuntosSegunRequerimientos(int cantLideres) {
+		List<List<Empleado>> posiblesLideres = new ArrayList<List<Empleado>>();
+		combinacionesLideres(posiblesLideres, new ArrayList<Empleado>(), 2, 0); //hay que cambiar la cantidad de lideres por lo que pide requerimientos
 		return null;
 	}
+	
+	private List<List<Empleado>> combinacionesLideres(List<List<Empleado>> posiblesLideres, List<Empleado> temporal
+														, int cantLideres, int inicio){
+		
+		// Caso base: si la combinacion tiene el tamanio correcto K
+        if (temporal.size() == cantLideres) {
+            posiblesLideres.add(new ArrayList<>(temporal));
+            return posiblesLideres;
+        }
+
+        // Iterar y construir combinaciones
+        for (int i = inicio; i < lideres.size(); i++) {
+            temporal.add(lideres.get(i));
+            posiblesLideres = combinacionesLideres(posiblesLideres, temporal, cantLideres, i + 1);
+            temporal.remove(temporal.size() - 1); // Backtracking
+        }
+		
+		return posiblesLideres;
+	}
+	
+//	para testear
+//	public void run() {
+//		lideres.add(new Empleado("Lider de proyecto", 0, "Juan"));
+//		lideres.add(new Empleado("Lider de proyecto", 0, "Carlos"));
+//		lideres.add(new Empleado("Lider de proyecto", 0, "Manuel"));
+//		lideres.add(new Empleado("Lider de proyecto", 0, "Pepe"));
+//		List<List<Empleado>> resultados = new ArrayList<>();
+//		System.out.println(combinacionesLideres(resultados, new ArrayList<Empleado>(), 2, 0));
+//	}
+	
 }

@@ -8,6 +8,10 @@ public class Hilo extends SwingWorker<Integer, Integer>{
 	//1er parametro = lo que devuelve doInBackground al terminar
 	//2do parametro = lo que se devuelve paso por paso a informar
 
+	public Hilo() {
+		
+	}
+	
 	@Override
 	protected Integer doInBackground() throws Exception {
 		for (int i = 0; i < 100; i++) {
