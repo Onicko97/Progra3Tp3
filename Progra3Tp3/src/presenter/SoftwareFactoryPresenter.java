@@ -120,6 +120,26 @@ public class SoftwareFactoryPresenter {
 	}
 	
 	public void buscarEquipo() {
-		_gestor.buscarEquipo();
+		_gestor.buscarEquipo(this);
+	}
+	// Para probar por consola
+	public void recibirEquipoResultante(java.util.List<model.Empleado> equipoGanador) {
+	    
+	    int puntajeTotal = 0;
+	    System.out.println("Integrantes del equipo:");
+	    
+	    for (model.Empleado emp : equipoGanador) {
+	        String rol = emp.get_rol();
+	        String nombre = emp.get_nombre();
+	        int calificacion = emp.get_calificacionHistorica();
+
+	        
+	        System.out.println("rol: " + rol + " nombre: " + nombre + " calificación: " + calificacion);
+	        
+	        
+	        puntajeTotal += emp.get_calificacionHistorica();
+	    }
+	    
+	    System.out.println("puntaje:" + puntajeTotal);
 	}
 }

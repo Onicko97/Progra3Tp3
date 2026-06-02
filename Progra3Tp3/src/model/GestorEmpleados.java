@@ -1,6 +1,9 @@
 package model;
 
 import java.util.List;
+
+import presenter.SoftwareFactoryPresenter;
+
 import java.security.InvalidParameterException;
 import java.util.HashMap;
 
@@ -31,10 +34,10 @@ public class GestorEmpleados {
 		Empleado emp = new Empleado(rol, calificacion, nombre);
 		_listaEmpleados.put(nombre, emp);
 	}
-	
-	public void buscarEquipo() {
-		Hilo hilo = new Hilo();
-		hilo.execute();
+	//despues de probarlo tengo que sacar el presenter
+	public void buscarEquipo(SoftwareFactoryPresenter presenter) {
+	    Hilo hilo = new Hilo(presenter, this);
+	    hilo.execute();
 	}
 	
 	public void settearRequerimientos(int cantLideres, int cantArquitectos, int cantProgramadores, int cantTesters) {

@@ -28,9 +28,9 @@ public class MejorCalificado {
 //		this.equipoTotal = lideresRequeridos + arquitectosRequeridos + testersRequeridos + programadoresRequeridos;
 		}
 
-	public List<Empleado> resolver(List<Empleado> empleados) {
+	public List<Empleado> resolver(List<Empleado> empleados,int reqLid, int reqArq, int reqProg, int reqTest) {
 		separarEmpleadosPorRol(empleados);
-		List<List<Empleado>> conjuntos = obtenerConjuntosSegunRequerimientos(1);
+		List<List<Empleado>> conjuntos = obtenerConjuntosSegunRequerimientos(reqLid, reqArq, reqProg, reqTest);
 		List<Empleado> equipoMasCalificado = buscarMejorEquipo(conjuntos);
 		return equipoMasCalificado;
 	}
@@ -45,7 +45,7 @@ public class MejorCalificado {
 	
 	public List<List<Empleado>> backtrack(int inicio, List<List<Empleado>> empleadosComb, List<Empleado> empleados, List<Empleado> comb, int requeridos ) {
 		if (comb.size() == requeridos ) {
-			empleadosComb.add(comb);
+			empleadosComb.add(new ArrayList<>(comb)); //lo clone para que no se borre
 			return null;
 		}
 		int limite = empleados.size() - (requeridos - comb.size());
@@ -58,49 +58,93 @@ public class MejorCalificado {
 	}
 	
 	public List<Empleado> buscarMejorEquipo(List<List<Empleado>> conjuntos) {
-		int mejorCalificacionTotal = 0;
-		List<Empleado> mejor = conjuntos.get(0); 
-		for(List<Empleado> equipo : conjuntos) {
-			int calificacion = 0;
-			for(Empleado emp : equipo) {
-				calificacion += emp.get_calificacionHistorica();
-			}
-			if(calificacion > mejorCalificacionTotal) {
-				mejor = equipo;
-				mejorCalificacionTotal = calificacion;
-				
-			}
-		}
-		return mejor;
+		
+	    int mejorCalificacionTotal = 0;
+	    List<Empleado> mejor = conjuntos.get(0); 
+	    
+	    for(List<Empleado> equipo : conjuntos) {
+	        int calificacion = 0;
+	        for(Empleado emp : equipo) {
+	            calificacion += emp.get_calificacionHistorica();
+	        }
+	        if(calificacion > mejorCalificacionTotal) {
+	            mejor = equipo;
+	            mejorCalificacionTotal = calificacion;
+	        }
+	    }
+	    return mejor;
 	}	
 	
 	public void separarEmpleadosPorRol(List<Empleado> empleados) {
-		for(Empleado e: empleados) {
-			switch(e.get_rol()) {
-			case "tester":
-				testers.add(e);
-				break;
-			case "programador":
-				programadores.add(e);
-				break;
-			case "arquitecto":
-				arquitectos.add(e);
-				break;
-			case "lider":
-				lideres.add(e);
-				break;
-			default:
-				break;
-			}
-		}
+	    for(Empleado e: empleados) {
+	    	
+	    	switch(e.get_rol()) {
+	            case "Tester":
+	                testers.add(e);
+	                break;
+	            case "Programador":
+	                programadores.add(e);
+	                break;
+	            case "Arquitecto":
+	                arquitectos.add(e);
+	                break;
+	            case "Lider de proyecto": 
+	                lideres.add(e);
+	                break;
+	            
+	        }
+	    }
 	}
 	
-	public List<List<Empleado>> obtenerConjuntosSegunRequerimientos(int cantLideres) {
-		List<List<Empleado>> posiblesLideres = new ArrayList<List<Empleado>>();
-		combinacionesLideres(posiblesLideres, new ArrayList<Empleado>(), 2, 0); //hay que cambiar la cantidad de lideres por lo que pide requerimientos
-		return null;
-	}
 	
+	public List<List<Empleado>> obtenerConjuntosSegunRequerimientos(int cantLideres,int cantArquitectos, int cantProgramadores, int cantTesters) {
+		//List<List<Empleado>> posiblesLideres = new ArrayList<List<Empleado>>();
+		//combinacionesLideres(posiblesLideres, new ArrayList<Empleado>(), 2, 0); //hay que cambiar la cantidad de lideres por lo que pide requerimientos
+		
+		List<List<Empleado>> posiblesLideres = obtenerCombinaciones(lideres, cantLideres);
+	    List<List<Empleado>> posiblesArquitectos = obtenerCombinaciones(arquitectos, cantArquitectos);
+	    List<List<Empleado>> posiblesProgramadores = obtenerCombinaciones(programadores, cantProgramadores);
+	    List<List<Empleado>> posiblesTesters = obtenerCombinaciones(testers, cantTesters);
+		
+	    List<List<Empleado>> todosLosEquiposValidos = new ArrayList<>();
+	    //aca se ven todos los equipos posibles
+	    for (List<Empleado> cLid : posiblesLideres) {
+	        for (List<Empleado> cArq : posiblesArquitectos) {
+	            for (List<Empleado> cProg : posiblesProgramadores) {
+	                for (List<Empleado> cTest : posiblesTesters) {
+	                    
+	                    // y aca fusiono las combinaciones
+	                    List<Empleado> equipoCandidato = new ArrayList<>();
+	                    equipoCandidato.addAll(cLid);
+	                    equipoCandidato.addAll(cArq);
+	                    equipoCandidato.addAll(cProg);
+	                    equipoCandidato.addAll(cTest);
+	                    
+	                    // si ninguno se odia entre sí, pasa la prueba
+	                    if (esEquipoValido(equipoCandidato)) {
+	                        todosLosEquiposValidos.add(equipoCandidato);
+	                    }
+	                }
+	            }
+	        }
+	    }
+	    return todosLosEquiposValidos;
+	
+	}
+	private boolean esEquipoValido(List<Empleado> equipo) {
+	   //recorro los empleados y me fijo si algunos son incompatibles
+		for (int i = 0; i < equipo.size(); i++) {
+	        Empleado emple1 = equipo.get(i);
+	        for (int j = i + 1; j < equipo.size(); j++) {
+	            Empleado emple2 = equipo.get(j);
+
+	            if (emple1.getIncompatibles().contains(emple2)) {
+	                return false;
+	            }
+	        }
+	    }
+	    return true;
+	}
 	private List<List<Empleado>> combinacionesLideres(List<List<Empleado>> posiblesLideres, List<Empleado> temporal
 														, int cantLideres, int inicio){
 		
