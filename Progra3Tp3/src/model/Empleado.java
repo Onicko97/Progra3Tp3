@@ -10,8 +10,9 @@ public class Empleado {
 	private int _calificacionHistorica;
 	private List<Empleado> incompatibles;
 	
-	
 	public Empleado(String rol, int calificacion, String nombre) {
+		if (calificacion < 1 || calificacion > 5)
+	        throw new IllegalArgumentException("Calificacion invalida");
 		this._nombre = nombre;
 		this._rol = rol;
 		this._calificacionHistorica = calificacion;

@@ -167,9 +167,6 @@ public class Vista extends JPanel {
 	        
 	    }
 
-	 public void modificarCelda() {
-		 
-	 }
 	
 	 public void setPresenter(SoftwareFactoryPresenter presenter) {
 	        this.presenter = presenter;

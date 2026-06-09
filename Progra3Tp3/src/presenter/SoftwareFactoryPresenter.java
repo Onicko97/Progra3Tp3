@@ -3,11 +3,13 @@ package presenter;
 import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.swing.JOptionPane;
 
 import model.Empleado;
 import model.GestorEmpleados;
+import model.Hilo;
 import view.CargaEmpleados;
 import view.EmpleadosIncompatibles;
 import view.VentanaPrincipal;
@@ -86,6 +88,7 @@ public class SoftwareFactoryPresenter {
 			}catch(NullPointerException e) {
 				_ventana.mostrarError("Requerimientos de equipo no ingresados");
 			}
+			break;
 		default:
 			break;
 		}
@@ -118,8 +121,20 @@ public class SoftwareFactoryPresenter {
 	        return false;
 	    }
 	}
-	
+//puse el Hilo aca y no en _gestor para que hilo pueda avisar qeu termino 	
 	public void buscarEquipo() {
-		_gestor.buscarEquipo();
+		_ventana.mostrarCargandoResultados(true);
+		Hilo hilo = new Hilo(this, _gestor); 
+	    hilo.execute();
+		}
+	
+	
+	public void equipoCalculadoExitosamente() {
+	    _ventana.mostrarCargandoResultados(false);
+	    _ventana.dibujarEquipoResultante(_gestor.getStringsMejorEquipo());
+	    _ventana.dibujarEquipoHeuristica(_gestor.getStringsEquipoHeuristica());
+	    _ventana.mostrarEstadisticas(_gestor.getEstadisticas());
 	}
+	
+	
 }

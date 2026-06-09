@@ -65,6 +65,7 @@ public class VentanaPrincipal extends JFrame {
 		resultado.setVisible(true);
 	}
 	
+	
 	public void mostrarCargaEmpleados() {
 		
 		cargaEmpleados.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
@@ -105,6 +106,25 @@ public class VentanaPrincipal extends JFrame {
         JOptionPane.showMessageDialog(this, msg, "Error", JOptionPane.ERROR_MESSAGE);
     }
 	
+	public void dibujarEquipoResultante(List<String> stringsEquipo) {
+	    this.resultado.mostrarListaFinal(stringsEquipo);
+	}
+	public void dibujarEquipoHeuristica(List<String> stringsEquipo) {
+		this.resultado.mostrarEquipoHeuristica(stringsEquipo);
+	}
 
+	public void setPresenter(SoftwareFactoryPresenter presenter) {
+	    this.vista.setPresenter(presenter);
+	    this.cargaEmpleados.setPresenter(presenter);
+	    this.empleadosIncompatibles.setPresenter(presenter);
+	    this.requerimientos.setPresenter(presenter);
+	}
+	public void mostrarCargandoResultados(boolean activar) {
+	    resultado.mostrarCargando(activar); 
+	}
+	
+	public void mostrarEstadisticas(List<String> estadisticas ) {
+		resultado.mostrarEstadisticas(estadisticas);
+	}
 	
 }
