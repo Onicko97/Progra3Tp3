@@ -9,6 +9,10 @@ public class MejorCalificado {
 	private List<Empleado> testers;
 	private List<Empleado> programadores;
 	
+	private int cantidadCasoBase;
+    private int cantidadEquiposValidos;
+    private int cantidadEquiposInvalidos;
+    private long tiempoTotal;
 	
 	public MejorCalificado() {
 		this.lideres = new ArrayList<Empleado>();
@@ -18,16 +22,22 @@ public class MejorCalificado {
 		}
 
 	public List<Empleado> resolver(List<Empleado> empleados,int reqLid, int reqArq, int reqProg, int reqTest) {
+		cantidadCasoBase = 0;
+        cantidadEquiposValidos = 0;
+        cantidadEquiposInvalidos = 0;
+        long inicio = System.currentTimeMillis();
+        
 		this.lideres.clear();
 	    this.arquitectos.clear();
 	    this.programadores.clear();
 	    this.testers.clear();
 	    
-	    
 		separarEmpleadosPorRol(empleados);
 		List<List<Empleado>> conjuntos = obtenerConjuntosSegunRequerimientos(reqLid, reqArq, reqProg, reqTest);
 		List<Empleado> mejorEquipo = buscarMejorEquipo(conjuntos); 
-	    return mejorEquipo;
+	    
+		tiempoTotal = System.currentTimeMillis() - inicio;
+		return mejorEquipo;
 	    
 	}
 	
@@ -42,6 +52,7 @@ public class MejorCalificado {
 	private List<List<Empleado>> backtrack(int inicio, List<List<Empleado>> empleadosComb, List<Empleado> empleados, List<Empleado> comb, int requeridos ) {
 		if (comb.size() == requeridos ) {
 			empleadosComb.add(new ArrayList<>(comb)); //lo clone para que no se borre
+			cantidadCasoBase++;
 			return null;
 		}
 		int limite = empleados.size() - (requeridos - comb.size());
@@ -118,7 +129,11 @@ public class MejorCalificado {
 	                    
 	                    // si ninguno se odia entre sí, pasa la prueba
 	                    if (esEquipoValido(equipoCandidato)) {
+	                    	cantidadEquiposValidos++;
 	                        todosLosEquiposValidos.add(equipoCandidato);
+	                    }
+	                    else {
+	                        cantidadEquiposInvalidos++;
 	                    }
 	                }
 	            }
@@ -141,5 +156,10 @@ public class MejorCalificado {
 	    }
 	    return true;
 	}
+	
+	public int getCantidadCasoBase() { return cantidadCasoBase; }
+	public int getCantidadEquiposValidos() { return cantidadEquiposValidos; }
+	public int getCantidadEquiposInvalidos() { return cantidadEquiposInvalidos; }
+	public long getTiempoTotal() { return tiempoTotal; }
 	
 }

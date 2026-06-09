@@ -3,6 +3,7 @@ package model;
 import java.util.List;
 
 import java.security.InvalidParameterException;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class GestorEmpleados {
@@ -49,6 +50,14 @@ public class GestorEmpleados {
 	
 	public List<Empleado> ejecutarBacktracking(List<Empleado> empleados, int lid, int arq, int prog, int test) {
 	    return algoritmoBacktracking.resolver(empleados, lid, arq, prog, test);
+	}
+	public List<String> getEstadisticas() {
+	    List<String> estadisticas = new ArrayList<>();
+	    estadisticas.add(String.valueOf(algoritmoBacktracking.getCantidadCasoBase()));
+	    estadisticas.add(String.valueOf(algoritmoBacktracking.getCantidadEquiposValidos()));
+	    estadisticas.add(String.valueOf(algoritmoBacktracking.getCantidadEquiposInvalidos()));
+	    estadisticas.add(String.valueOf(algoritmoBacktracking.getTiempoTotal()));
+	    return estadisticas;
 	}
 	
 }

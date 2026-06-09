@@ -119,4 +119,9 @@ public class VentanaPrincipal extends JFrame {
 	public void mostrarCargandoResultados(boolean activar) {
 	    resultado.mostrarCargando(activar); 
 	}
+	
+	public void mostrarEstadisticas(List<String> estadisticas ) {
+		resultado.mostrarEstadisticas(estadisticas);
+	}
+	
 }

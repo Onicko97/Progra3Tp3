@@ -134,6 +134,7 @@ public class SoftwareFactoryPresenter {
 	        .map(e -> e.get_rol() + " - " + e.get_nombre() + " - " + e.get_calificacionHistorica())
 	        .collect(Collectors.toList());
 	    _ventana.dibujarEquipoResultante(stringsEquipo);
+	    _ventana.mostrarEstadisticas( _gestor.getEstadisticas());
 	}
 	
 	

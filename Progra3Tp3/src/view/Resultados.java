@@ -22,6 +22,12 @@ public class Resultados extends JDialog {
 	JLabel cantArquitectos;
 	JLabel cantProg;
 	JLabel cantTesters;
+	
+	JLabel lblCasoBase;
+	JLabel lblValidos;
+	JLabel lblInvalidos;
+	JLabel lblTiempo;
+	
 	private JTextArea txtResultados;
 	private JProgressBar barraProgreso;
 	private JButton btnResolver;
@@ -37,7 +43,7 @@ public class Resultados extends JDialog {
         
         setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		setTitle("Mejor Equipo");
-		setBounds(100, 100, 650, 500);
+		setBounds(100, 100, 650, 600);
 		getContentPane().setLayout(null);
 		
 		JLabel lblRequerimientosDeEquipo = new JLabel("Requerimientos del Equipo:");
@@ -76,6 +82,21 @@ public class Resultados extends JDialog {
 		cantTesters.setBounds(129, 120, 46, 14);
 		getContentPane().add(cantTesters);
 		
+		lblCasoBase = new JLabel("Casos base: ");
+		lblCasoBase.setBounds(20, 460, 250, 14);
+		getContentPane().add(lblCasoBase);
+
+		lblValidos = new JLabel("Equipos válidos: ");
+		lblValidos.setBounds(20, 480, 250, 14);
+		getContentPane().add(lblValidos);
+
+		lblInvalidos = new JLabel("Equipos descartados: ");
+		lblInvalidos.setBounds(20, 500, 250, 14);
+		getContentPane().add(lblInvalidos);
+
+		lblTiempo = new JLabel("Tiempo total: ");
+		lblTiempo.setBounds(20, 520, 250, 14);
+		getContentPane().add(lblTiempo);
 		
 		txtResultados = new JTextArea();
 	    txtResultados.setEditable(false);
@@ -115,7 +136,7 @@ public class Resultados extends JDialog {
 	}
 	
 	public void mostrarListaFinal(List<String> stringsEquipo) {
-	    txtResultados.setText(""); // Limpiamos texto viejo
+	    txtResultados.setText(""); 
 	    
 	    if (stringsEquipo.isEmpty()) {
 	        txtResultados.setText("No se encontró ningún equipo compatible.");
@@ -142,5 +163,11 @@ public class Resultados extends JDialog {
 	    btnResolver.setEnabled(!activar);
 	}
 	
+	public void mostrarEstadisticas(List<String> estadisticas) {
+	    lblCasoBase.setText("Casos base: " + estadisticas.get(0));
+	    lblValidos.setText("Equipos válidos: " + estadisticas.get(1));
+	    lblInvalidos.setText("Equipos descartados: " + estadisticas.get(2));
+	    lblTiempo.setText("Tiempo total: " + estadisticas.get(3) + " ms");
+	}
 	
 }
