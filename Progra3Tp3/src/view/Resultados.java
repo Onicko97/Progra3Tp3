@@ -68,7 +68,7 @@ public class Resultados extends JDialog {
 		getContentPane().add(cantArquitectos);
 		
 		JLabel lblProgramadores = new JLabel("Programadores:");
-		lblProgramadores.setBounds(20, 95, 84, 14);
+		lblProgramadores.setBounds(20, 95, 99, 14);
 		getContentPane().add(lblProgramadores);
 		
 		cantProg = new JLabel("0");
@@ -76,7 +76,7 @@ public class Resultados extends JDialog {
 		getContentPane().add(cantProg);
 		
 		JLabel lblTesters = new JLabel("Testers:");
-		lblTesters.setBounds(20, 120, 46, 14);
+		lblTesters.setBounds(20, 120, 72, 14);
 		getContentPane().add(lblTesters);
 		
 		cantTesters = new JLabel("0");

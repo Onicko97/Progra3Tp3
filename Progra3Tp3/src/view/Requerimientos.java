@@ -49,12 +49,12 @@ public class Requerimientos extends JDialog {
 		contentPanel.setLayout(null);
 		{
 			JLabel lblCantLideres = new JLabel("Cantidad de Lideres de proyecto: ");
-			lblCantLideres.setBounds(35, 45, 172, 14);
+			lblCantLideres.setBounds(35, 45, 194, 14);
 			contentPanel.add(lblCantLideres);
 		}
 		{
 			textFieldCantLideres = new JTextField();
-			textFieldCantLideres.setBounds(217, 42, 86, 20);
+			textFieldCantLideres.setBounds(238, 42, 86, 20);
 			contentPanel.add(textFieldCantLideres);
 			textFieldCantLideres.setColumns(10);
 		}
@@ -66,7 +66,7 @@ public class Requerimientos extends JDialog {
 		{
 			textFieldCantArquitectos = new JTextField();
 			textFieldCantArquitectos.setColumns(10);
-			textFieldCantArquitectos.setBounds(217, 67, 86, 20);
+			textFieldCantArquitectos.setBounds(238, 67, 86, 20);
 			contentPanel.add(textFieldCantArquitectos);
 		}
 		{
@@ -77,7 +77,7 @@ public class Requerimientos extends JDialog {
 		{
 			textFieldCantProgramadores = new JTextField();
 			textFieldCantProgramadores.setColumns(10);
-			textFieldCantProgramadores.setBounds(217, 92, 86, 20);
+			textFieldCantProgramadores.setBounds(238, 92, 86, 20);
 			contentPanel.add(textFieldCantProgramadores);
 		}
 		{
@@ -88,7 +88,7 @@ public class Requerimientos extends JDialog {
 		{
 			textFieldCantTesters = new JTextField();
 			textFieldCantTesters.setColumns(10);
-			textFieldCantTesters.setBounds(217, 117, 86, 20);
+			textFieldCantTesters.setBounds(238, 117, 86, 20);
 			contentPanel.add(textFieldCantTesters);
 		}
 		{
