@@ -121,7 +121,7 @@ public class SoftwareFactoryPresenter {
 	        return false;
 	    }
 	}
-//desde aca se crea Hilo y no en _gestor para que hilo pueda avisar qeu termino 	
+//puse el Hilo aca y no en _gestor para que hilo pueda avisar qeu termino 	
 	public void buscarEquipo() {
 		_ventana.mostrarCargandoResultados(true);
 		Hilo hilo = new Hilo(this, _gestor); 
