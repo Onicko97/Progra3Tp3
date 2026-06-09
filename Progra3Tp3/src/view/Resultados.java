@@ -1,10 +1,12 @@
 package view;
 
-import java.awt.BorderLayout;
+
 import java.util.List;
 
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JProgressBar;
+import javax.swing.JTextArea;
 
 import presenter.SoftwareFactoryPresenter;
 
@@ -20,7 +22,10 @@ public class Resultados extends JDialog {
 	JLabel cantArquitectos;
 	JLabel cantProg;
 	JLabel cantTesters;
-
+	private JTextArea txtResultados;
+	private JProgressBar barraProgreso;
+	private JButton btnResolver;
+	
 	public Resultados() {
 		/*setBackground(Color.LIGHT_GRAY);
         setLayout(new FlowLayout());
@@ -71,17 +76,32 @@ public class Resultados extends JDialog {
 		cantTesters.setBounds(129, 120, 46, 14);
 		getContentPane().add(cantTesters);
 		
-		JButton btnResolver = new JButton("Resolver");
+		
+		txtResultados = new JTextArea();
+	    txtResultados.setEditable(false);
+	    
+	    javax.swing.JScrollPane scrollResultados = new javax.swing.JScrollPane(txtResultados);
+	    scrollResultados.setBounds(20, 190, 590, 250); 
+	    getContentPane().add(scrollResultados);
+		
+	    barraProgreso = new JProgressBar();
+	    barraProgreso.setBounds(20, 160, 230, 20); 
+	    barraProgreso.setVisible(false); 
+	    getContentPane().add(barraProgreso);
+	    
+		btnResolver = new JButton("Resolver");
 		btnResolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
 				presenter.buscarEquipo();
 				
 			}
 		});
 		btnResolver.setBounds(275, 150, 89, 23);
 		getContentPane().add(btnResolver);
+	
+		
 	}
+	
 	
 	public void settearRequerimientos(List<String> requerimientos) {
 		cantLideres.setText(requerimientos.get(0));
@@ -93,5 +113,34 @@ public class Resultados extends JDialog {
 	public void settearPresenter(SoftwareFactoryPresenter presenter) {
 		this.presenter = presenter;
 	}
+	
+	public void mostrarListaFinal(List<String> stringsEquipo) {
+	    txtResultados.setText(""); // Limpiamos texto viejo
+	    
+	    if (stringsEquipo.isEmpty()) {
+	        txtResultados.setText("No se encontró ningún equipo compatible.");
+	        return;
+	    }
+	    
+	    txtResultados.append("MEJOR EQUIPO ENCONTRADO\n\n\n\n");
+	    
+	    for (String linea : stringsEquipo) {
+	        //esto es para separadar el string
+	        String[] partes = linea.split(" - ");
+	        String rol = partes[0].toUpperCase();
+	        String nombre = partes[1];
+	        String calif = partes[2];
+	        
+	   
+	        txtResultados.append( rol + " : " + nombre + " (Puntaje: " + calif + " puntos)\n");
+	    }
+	}
+	
+	public void mostrarCargando(boolean activar) {
+	    barraProgreso.setIndeterminate(activar); //activa la animacion
+	    barraProgreso.setVisible(activar);
+	    btnResolver.setEnabled(!activar);
+	}
+	
 	
 }

@@ -2,8 +2,6 @@ package model;
 
 import java.util.List;
 
-import presenter.SoftwareFactoryPresenter;
-
 import java.security.InvalidParameterException;
 import java.util.HashMap;
 
@@ -12,6 +10,7 @@ public class GestorEmpleados {
 	HashMap<String, Empleado> _listaEmpleados;		//clave=nombre valor=Empleado
 	//HashMap<String, String> _listaIncompatibles;	//clave=nombre1 valor=nombre2
 	Requerimiento requerimientos;
+	private MejorCalificado algoritmoBacktracking = new MejorCalificado();
 	
 	public GestorEmpleados() {
 		this._listaEmpleados = new HashMap<String, Empleado>();
@@ -34,11 +33,7 @@ public class GestorEmpleados {
 		Empleado emp = new Empleado(rol, calificacion, nombre);
 		_listaEmpleados.put(nombre, emp);
 	}
-	//despues de probarlo tengo que sacar el presenter
-	public void buscarEquipo(SoftwareFactoryPresenter presenter) {
-	    Hilo hilo = new Hilo(presenter, this);
-	    hilo.execute();
-	}
+
 	
 	public void settearRequerimientos(int cantLideres, int cantArquitectos, int cantProgramadores, int cantTesters) {
 		requerimientos = new Requerimiento(cantLideres, cantArquitectos, cantProgramadores, cantTesters);
@@ -50,6 +45,10 @@ public class GestorEmpleados {
 	
 	public List<Empleado> getIncompatibles(String nombreEmpleado){
 		return _listaEmpleados.get(nombreEmpleado).getIncompatibles();
+	}
+	
+	public List<Empleado> ejecutarBacktracking(List<Empleado> empleados, int lid, int arq, int prog, int test) {
+	    return algoritmoBacktracking.resolver(empleados, lid, arq, prog, test);
 	}
 	
 }

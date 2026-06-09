@@ -3,11 +3,13 @@ package presenter;
 import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.swing.JOptionPane;
 
 import model.Empleado;
 import model.GestorEmpleados;
+import model.Hilo;
 import view.CargaEmpleados;
 import view.EmpleadosIncompatibles;
 import view.VentanaPrincipal;
@@ -86,6 +88,7 @@ public class SoftwareFactoryPresenter {
 			}catch(NullPointerException e) {
 				_ventana.mostrarError("Requerimientos de equipo no ingresados");
 			}
+			break;
 		default:
 			break;
 		}
@@ -118,28 +121,20 @@ public class SoftwareFactoryPresenter {
 	        return false;
 	    }
 	}
-	
+//desde aca se crea Hilo y no en _gestor para que hilo pueda avisar qeu termino 	
 	public void buscarEquipo() {
-		_gestor.buscarEquipo(this);
+		_ventana.mostrarCargandoResultados(true);
+		Hilo hilo = new Hilo(this, _gestor); 
+	    hilo.execute();
+		}
+//usamos streams
+	public void equipoCalculadoExitosamente(List<Empleado> equipo) {
+		_ventana.mostrarCargandoResultados(false);
+		List<String> stringsEquipo = equipo.stream()
+	        .map(e -> e.get_rol() + " - " + e.get_nombre() + " - " + e.get_calificacionHistorica())
+	        .collect(Collectors.toList());
+	    _ventana.dibujarEquipoResultante(stringsEquipo);
 	}
-	// Para probar por consola
-	public void recibirEquipoResultante(java.util.List<model.Empleado> equipoGanador) {
-	    
-	    int puntajeTotal = 0;
-	    System.out.println("Integrantes del equipo:");
-	    
-	    for (model.Empleado emp : equipoGanador) {
-	        String rol = emp.get_rol();
-	        String nombre = emp.get_nombre();
-	        int calificacion = emp.get_calificacionHistorica();
-
-	        
-	        System.out.println("rol: " + rol + " nombre: " + nombre + " calificación: " + calificacion);
-	        
-	        
-	        puntajeTotal += emp.get_calificacionHistorica();
-	    }
-	    
-	    System.out.println("puntaje:" + puntajeTotal);
-	}
+	
+	
 }

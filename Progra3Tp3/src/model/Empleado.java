@@ -10,7 +10,6 @@ public class Empleado {
 	private int _calificacionHistorica;
 	private List<Empleado> incompatibles;
 	
-	
 	public Empleado(String rol, int calificacion, String nombre) {
 		this._nombre = nombre;
 		this._rol = rol;
