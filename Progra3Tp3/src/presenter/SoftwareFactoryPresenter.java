@@ -127,14 +127,13 @@ public class SoftwareFactoryPresenter {
 		Hilo hilo = new Hilo(this, _gestor); 
 	    hilo.execute();
 		}
-//usamos streams
-	public void equipoCalculadoExitosamente(List<Empleado> equipo) {
-		_ventana.mostrarCargandoResultados(false);
-		List<String> stringsEquipo = equipo.stream()
-	        .map(e -> e.get_rol() + " - " + e.get_nombre() + " - " + e.get_calificacionHistorica())
-	        .collect(Collectors.toList());
-	    _ventana.dibujarEquipoResultante(stringsEquipo);
-	    _ventana.mostrarEstadisticas( _gestor.getEstadisticas());
+	
+	
+	public void equipoCalculadoExitosamente() {
+	    _ventana.mostrarCargandoResultados(false);
+	    _ventana.dibujarEquipoResultante(_gestor.getStringsMejorEquipo());
+	    _ventana.dibujarEquipoHeuristica(_gestor.getStringsEquipoHeuristica());
+	    _ventana.mostrarEstadisticas(_gestor.getEstadisticas());
 	}
 	
 	

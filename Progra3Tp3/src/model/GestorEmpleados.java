@@ -12,6 +12,9 @@ public class GestorEmpleados {
 	//HashMap<String, String> _listaIncompatibles;	//clave=nombre1 valor=nombre2
 	Requerimiento requerimientos;
 	private MejorCalificado algoritmoBacktracking = new MejorCalificado();
+	private Heuristica algoritmoHeuristica = new Heuristica();
+	private List<Empleado> mejorEquipo = new ArrayList<>();
+	private List<Empleado> equipoHeuristica = new ArrayList<>();
 	
 	public GestorEmpleados() {
 		this._listaEmpleados = new HashMap<String, Empleado>();
@@ -48,9 +51,22 @@ public class GestorEmpleados {
 		return _listaEmpleados.get(nombreEmpleado).getIncompatibles();
 	}
 	
-	public List<Empleado> ejecutarBacktracking(List<Empleado> empleados, int lid, int arq, int prog, int test) {
-	    return algoritmoBacktracking.resolver(empleados, lid, arq, prog, test);
+	public void ejecutarBacktracking(List<Empleado> empleados, int lid, int arq, int prog, int test) {
+	    mejorEquipo = algoritmoBacktracking.resolver(empleados, lid, arq, prog, test);
 	}
+
+	public void ejecutarHeuristica(List<Empleado> empleados, int lid, int arq, int prog, int test) {
+	    equipoHeuristica = algoritmoHeuristica.resolver(empleados, lid, arq, prog, test);
+	}
+
+	public List<String> getStringsMejorEquipo() {
+	    return toStrings(mejorEquipo);
+	}
+
+	public List<String> getStringsEquipoHeuristica() {
+	    return toStrings(equipoHeuristica);
+	}
+
 	public List<String> getEstadisticas() {
 	    List<String> estadisticas = new ArrayList<>();
 	    estadisticas.add(String.valueOf(algoritmoBacktracking.getCantidadCasoBase()));
@@ -59,5 +75,14 @@ public class GestorEmpleados {
 	    estadisticas.add(String.valueOf(algoritmoBacktracking.getTiempoTotal()));
 	    return estadisticas;
 	}
-	
+	public long getTiempoHeuristica() {
+	    return algoritmoHeuristica.getTiempoTotal();
+	}
+	private List<String> toStrings(List<Empleado> equipo) {
+	    List<String> strings = new ArrayList<>();
+	    for (Empleado e : equipo) {
+	        strings.add(e.get_rol() + " - " + e.get_nombre() + " - " + e.get_calificacionHistorica());
+	    }
+	    return strings;
+	}
 }

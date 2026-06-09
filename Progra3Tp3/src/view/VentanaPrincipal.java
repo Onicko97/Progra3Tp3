@@ -109,6 +109,9 @@ public class VentanaPrincipal extends JFrame {
 	public void dibujarEquipoResultante(List<String> stringsEquipo) {
 	    this.resultado.mostrarListaFinal(stringsEquipo);
 	}
+	public void dibujarEquipoHeuristica(List<String> stringsEquipo) {
+		this.resultado.mostrarEquipoHeuristica(stringsEquipo);
+	}
 
 	public void setPresenter(SoftwareFactoryPresenter presenter) {
 	    this.vista.setPresenter(presenter);

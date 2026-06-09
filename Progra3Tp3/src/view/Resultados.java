@@ -29,6 +29,7 @@ public class Resultados extends JDialog {
 	JLabel lblTiempo;
 	
 	private JTextArea txtResultados;
+	private JTextArea txtHeuristica;
 	private JProgressBar barraProgreso;
 	private JButton btnResolver;
 	
@@ -43,7 +44,7 @@ public class Resultados extends JDialog {
         
         setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		setTitle("Mejor Equipo");
-		setBounds(100, 100, 650, 600);
+		setBounds(100, 100, 1000, 600);
 		getContentPane().setLayout(null);
 		
 		JLabel lblRequerimientosDeEquipo = new JLabel("Requerimientos del Equipo:");
@@ -82,6 +83,8 @@ public class Resultados extends JDialog {
 		cantTesters.setBounds(129, 120, 46, 14);
 		getContentPane().add(cantTesters);
 		
+		//estadisticas
+		
 		lblCasoBase = new JLabel("Casos base: ");
 		lblCasoBase.setBounds(20, 460, 250, 14);
 		getContentPane().add(lblCasoBase);
@@ -98,15 +101,36 @@ public class Resultados extends JDialog {
 		lblTiempo.setBounds(20, 520, 250, 14);
 		getContentPane().add(lblTiempo);
 		
+		//algoritmos
+		JLabel lblBacktracking = new JLabel("Backtracking:");
+		lblBacktracking.setBounds(20, 170, 150, 14);
+		getContentPane().add(lblBacktracking);
+
+		JLabel lblHeuristica = new JLabel("Heurística:");
+		lblHeuristica.setBounds(510, 170, 150, 14);
+		getContentPane().add(lblHeuristica);
+		
+		//equipo backtracking
+		
 		txtResultados = new JTextArea();
 	    txtResultados.setEditable(false);
 	    
 	    javax.swing.JScrollPane scrollResultados = new javax.swing.JScrollPane(txtResultados);
-	    scrollResultados.setBounds(20, 190, 590, 250); 
+	    scrollResultados.setBounds(20, 190, 460, 250); 
 	    getContentPane().add(scrollResultados);
 		
+	    //equipo heuristica
+	 
+	    txtHeuristica = new JTextArea();
+	    txtHeuristica.setEditable(false);
+	    javax.swing.JScrollPane scrollHeuristica = new javax.swing.JScrollPane(txtHeuristica);
+	    scrollHeuristica.setBounds(510, 190, 460, 250);
+	    getContentPane().add(scrollHeuristica);
+	    
+	    //barra de carga
+	    
 	    barraProgreso = new JProgressBar();
-	    barraProgreso.setBounds(20, 160, 230, 20); 
+	    barraProgreso.setBounds(185, 114, 230, 20); 
 	    barraProgreso.setVisible(false); 
 	    getContentPane().add(barraProgreso);
 	    
@@ -143,7 +167,7 @@ public class Resultados extends JDialog {
 	        return;
 	    }
 	    
-	    txtResultados.append("MEJOR EQUIPO ENCONTRADO\n\n\n\n");
+	    txtResultados.append("MEJOR EQUIPO ENCONTRADO\n\n");
 	    
 	    for (String linea : stringsEquipo) {
 	        //esto es para separadar el string
@@ -154,6 +178,20 @@ public class Resultados extends JDialog {
 	        
 	   
 	        txtResultados.append( rol + " : " + nombre + " (Puntaje: " + calif + " puntos)\n");
+	    }
+	}
+	public void mostrarEquipoHeuristica(List<String> stringsEquipo) {
+	    txtHeuristica.setText("");
+	    
+	    if (stringsEquipo.isEmpty()) {
+	        txtHeuristica.setText("No se encontró ningún equipo compatible.");
+	        return;
+	    }
+	    
+	    txtHeuristica.append("EQUIPO POR HEURISTICA\n\n");
+	    for (String lineaCruda : stringsEquipo) {
+	        String[] partes = lineaCruda.split(" - ");
+	        txtHeuristica.append(partes[0].toUpperCase() + " : " + partes[1] + " (Puntaje: " + partes[2] + " puntos)\n");
 	    }
 	}
 	

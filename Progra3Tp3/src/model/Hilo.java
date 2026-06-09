@@ -19,23 +19,24 @@ public class Hilo extends SwingWorker<Void, Integer>{
 	
 	@Override
 	protected Void doInBackground() throws Exception {
-		List<String> reqStrings = _gestor.getStringsRequerimientos();
-		List<Empleado> todosLosEmpleados = new ArrayList<>(_gestor.getListaEmpleados().values());
-		
-		int reqLid  = Integer.parseInt(reqStrings.get(0));
-		int reqArq  = Integer.parseInt(reqStrings.get(1));
-		int reqProg = Integer.parseInt(reqStrings.get(2));
-		int reqTest = Integer.parseInt(reqStrings.get(3));
-		
-		_gestor.ejecutarBacktracking(todosLosEmpleados, reqLid, reqArq, reqProg, reqTest);
-		resultado = _gestor.ejecutarBacktracking(todosLosEmpleados, reqLid, reqArq, reqProg, reqTest);
+	    List<String> reqStrings = _gestor.getStringsRequerimientos();
+	    List<Empleado> todosLosEmpleados = new ArrayList<>(_gestor.getListaEmpleados().values());
+
+	    int reqLid  = Integer.parseInt(reqStrings.get(0));
+	    int reqArq  = Integer.parseInt(reqStrings.get(1));
+	    int reqProg = Integer.parseInt(reqStrings.get(2));
+	    int reqTest = Integer.parseInt(reqStrings.get(3));
+
+	    _gestor.ejecutarBacktracking(todosLosEmpleados, reqLid, reqArq, reqProg, reqTest);
+	    _gestor.ejecutarHeuristica(todosLosEmpleados, reqLid, reqArq, reqProg, reqTest);
+
 	    return null;
 	}
-	
+
 	@Override
 	protected void done() {
-		if (_presenter != null) {
-	        _presenter.equipoCalculadoExitosamente(resultado); 
+	    if (_presenter != null) {
+	        _presenter.equipoCalculadoExitosamente();
 	    }
 	}
 }	
